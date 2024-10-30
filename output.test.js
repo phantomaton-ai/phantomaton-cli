@@ -10,8 +10,9 @@ describe('output', () => {
     process.stdout.write.restore();
   });
 
-  it('should write to stdout', () => {
+  it('writes to stdout', () => {
     output('Hello, world!');
-    expect(process.stdout.write).to.have.been.calledWith('Hello, world!');
+    expect(process.stdout.write.callCount).to.equal(1);
+    expect(process.stdout.write.lastCall.args[0]).to.equal('Hello, world!');
   });
 });
