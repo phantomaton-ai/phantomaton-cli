@@ -19,5 +19,8 @@
   "type": "module",
   "devDependencies": {
     "lovecraft": "^1.0.2"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0"
   }
 }
