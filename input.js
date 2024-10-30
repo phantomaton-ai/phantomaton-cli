@@ -10,7 +10,7 @@ const input = async (prompt) => {
         lines.push(line.slice(0, line.length - 1));
       } else {
         lines.push(line);
-        resolve(lines.join('\n'))
+        resolve(lines.join('\n'));
       }
     });
   });

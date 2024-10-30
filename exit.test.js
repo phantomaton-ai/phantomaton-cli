@@ -1,6 +1,6 @@
 import { expect, stub } from 'lovecraft';
 
-import exit, { Exit } from './exit.js'
+import exit, { Exit } from './exit.js';
 
 describe('exit', () => {
   it('throws an Exit error', async () => {
