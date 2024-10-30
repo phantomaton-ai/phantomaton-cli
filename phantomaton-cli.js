@@ -6,9 +6,9 @@ import user from './user.js';
 
 const cli = () => ({
   install: [
-    conversations.user.provider([], () => user);
+    conversations.user.provider([], () => user),
     priestess.start.provider(
-      [conversation.resolve],
+      [conversations.conversation.resolve],
       (conversation) => () => start(conversation([]))
     )
   ]
