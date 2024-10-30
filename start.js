@@ -1,5 +1,12 @@
 const start = async (conversation) => {
-  while (true) await conversation.advance();
+  while (true) {
+    try {
+      await conversation.advance();
+    } catch (error) {
+      break;
+    }
+  }
+  process.exit();
 };
 
 export default start;

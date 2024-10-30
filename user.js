@@ -1,17 +1,20 @@
 import chalk from 'chalk';
 
-import input from './input.js';
+import exit from './exit.js';
+import terminal from './terminal.js';
 
 class User {
-  converse(turns) {
+  async converse(turns) {
     if (turns.length > 0) {
       const { reply } = turns[turns.length - 1];
-      output(`\n${chalk.green(reply)}\n\n`);
+      terminal.output(`\n${chalk.green(reply)}\n\n`);
     }
-    const message = await input('> ');
-    if (message === 'exit') process.exit();
+    const message = await terminal.input('> ');
+    if (message.trim() === 'exit') exit();
     return message;
   }
 }
 
-export default () => new User();
+const user = () => new User();
+
+export default user; 
