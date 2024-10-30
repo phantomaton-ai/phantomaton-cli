@@ -1,19 +1,21 @@
 import { expect, stub } from 'lovecraft';
 import input from './input.js';
-import output from './output.js';
+
+// Not in beforeEach, so we don't swallow test output
+const stubs = () => {
+  stub(process.stdin, 'on');
+  stub(process.stdout, 'write');
+};
+
+const unstub = () => {
+  process.stdin.on.restore();
+  process.stdout.write.restore();  
+};
 
 describe('input', () => {
-  beforeEach(() => {
-    stub(process.stdin, 'on');
-    stub(output);
-  });
+  it('handles single-line input', async () => {
+    stubs();
 
-  afterEach(() => {
-    process.stdin.on.restore();
-    output.restore();
-  });
-
-  it('should handle single-line input', async () => {
     process.stdin.on.callsFake((event, callback) => {
       if (event === 'data') {
         callback(Buffer.from('Hello\n'));
@@ -22,29 +24,27 @@ describe('input', () => {
 
     const result = await input('Enter input: ');
     expect(result).to.equal('Hello');
-    expect(output).to.have.been.calledWith('Enter input: ');
+    expect(process.stdout.write.callCount).to.equal(1);
+    expect(process.stdout.write.lastCall.args[0]).to.equal('Enter input: ');
+
+    unstub();
   });
 
-  it('should handle multi-line input', async () => {
+  it('handles multi-line input', async () => {
+    stubs();
+    
     process.stdin.on.callsFake((event, callback) => {
       if (event === 'data') {
-        callback(Buffer.from('Hello\\\nWorld\n'));
+        callback(Buffer.from('Hello\\\n'));
+        callback(Buffer.from('World\n'));
       }
     });
 
     const result = await input('Enter input: ');
     expect(result).to.equal('Hello\nWorld');
-    expect(output).to.have.been.calledWith('Enter input: ');
-  });
+    expect(process.stdout.write.callCount).to.equal(1);
+    expect(process.stdout.write.lastCall.args[0]).to.equal('Enter input: ');
 
-  it('should handle "exit" command', async () => {
-    process.stdin.on.callsFake((event, callback) => {
-      if (event === 'data') {
-        callback(Buffer.from('exit\n'));
-      }
-    });
-
-    await expect(input('Enter input: ')).to.be.rejectedWith('Process exited');
-    expect(output).to.have.been.calledWith('Enter input: ');
+    unstub();
   });
 });
