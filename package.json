@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "chalk": "^5.3.0",
+    "phantomaton-conversations": "^1.0.0",
     "priestess": "^1.0.1",
     "sigilium": "^1.0.1",
     "yargs": "^17.7.2"
