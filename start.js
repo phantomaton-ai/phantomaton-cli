@@ -3,6 +3,7 @@ const start = async (conversation) => {
     try {
       await conversation.advance();
     } catch (error) {
+      console.log(error);
       break;
     }
   }
