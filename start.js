@@ -1,9 +1,11 @@
+import output from './output.js';
+
 const start = async (conversation) => {
   while (true) {
     try {
       await conversation.advance();
     } catch (error) {
-      console.log(error);
+      output(error.message);
       break;
     }
   }
