@@ -9,7 +9,7 @@ const cli = () => ({
     conversations.user.provider([], () => user),
     priestess.start.provider(
       [conversations.conversation.resolve],
-      (conversation) => () => start(conversation([]))
+      ([conversation]) => () => start(conversation([]))
     )
   ]
 });
