@@ -18,11 +18,10 @@ describe('phantomaton-cli', () => {
     container.install(conversations.assistant.provider([], () => () => new Assistant()));
     container.install(priestess.start.resolver());
 
-    const [getUser] = container.resolve(conversations.user.resolve);
-    const user = getUser();
+    const [user] = container.resolve(conversations.user.resolve);
     expect(user).to.be.an('object');
 
-    const [getStart] = container.resolve(priestess.start.resolve);
-    expect(getStart).to.be.a('function');
+    const [start] = container.resolve(priestess.start.resolve);
+    expect(start).to.be.a('function');
   });
 });
