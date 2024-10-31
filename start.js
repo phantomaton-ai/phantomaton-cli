@@ -1,3 +1,4 @@
+import { Exit } from './exit.js';
 import output from './output.js';
 
 const start = async (conversation) => {
@@ -5,7 +6,8 @@ const start = async (conversation) => {
     try {
       await conversation.advance();
     } catch (error) {
-      output(error.message);
+      if (!(error instanceof Exit)) console.error(error);
+      else output(`${error.message}\n`);
       break;
     }
   }
