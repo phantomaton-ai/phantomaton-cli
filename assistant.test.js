@@ -1,7 +1,6 @@
 import { expect, stub } from 'lovecraft';
 import chalk from 'chalk';
 
-import { Exit } from './exit.js';
 import terminal from './terminal.js';
 import assistant from './assistant.js';
 
