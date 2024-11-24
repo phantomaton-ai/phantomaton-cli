@@ -19,13 +19,12 @@ describe('user', () => {
     terminal.output.restore();
   });
 
-  it('converse calls input and output', async () => {
+  it('converse calls input', async () => {
     terminal.input.resolves('Hello');
     await u.converse([{ reply: 'Hi there!' }]);
     expect(terminal.input.callCount).to.equal(1);
     expect(terminal.input.lastCall.args[0]).to.equal('> ');
-    expect(terminal.output.callCount).to.equal(1);
-    expect(terminal.output.lastCall.args[0]).to.equal(`\n${chalk.green('Hi there!')}\n\n`);
+    expect(terminal.output.callCount).to.equal(0);
   });
 
   it('converse handles "exit" command', async () => {
