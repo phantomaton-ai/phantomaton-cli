@@ -59,8 +59,6 @@ describe('phantomaton-cli', () => {
     const [start] = container.resolve(priestess.start.resolve);
     expect(start).to.be.a('function');
 
-    console.log(container.resolve(system.system.provide));
-
     await user.converse([]);
 
     expect(input.callCount).to.equal(1);
