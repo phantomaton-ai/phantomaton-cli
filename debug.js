@@ -11,7 +11,7 @@ class Debug {
 
   async converse(turns) {
     const message = await this.user.converse(turns);
-    terminal.output(`\n${chalk.blue(this.system())}\n\n`)
+    terminal.output(`\n${chalk.blue(this.system())}\n\n`);
     return message;
   }
 }
