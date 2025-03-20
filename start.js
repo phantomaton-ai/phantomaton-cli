@@ -7,7 +7,7 @@ const start = async (conversation) => {
   while (true) {
     try {
       const { message, reply } = await conversation.advance();
-      terminal.output(`\n${chalk.green(reply)}\n\n`);
+      output(`\n${chalk.green(reply)}\n\n`);
     } catch (error) {
       if (!(error instanceof Exit)) console.error(error);
       else output(`${error.message}\n`);
