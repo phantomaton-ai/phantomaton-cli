@@ -1,10 +1,13 @@
+import chalk from 'chalk';
+
 import { Exit } from './exit.js';
 import output from './output.js';
 
 const start = async (conversation) => {
   while (true) {
     try {
-      await conversation.advance();
+      const { message, reply } = await conversation.advance();
+      terminal.output(`\n${chalk.green(reply)}\n\n`);
     } catch (error) {
       if (!(error instanceof Exit)) console.error(error);
       else output(`${error.message}\n`);
